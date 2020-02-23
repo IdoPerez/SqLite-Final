@@ -46,17 +46,18 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:id="@+id/Infor"
+
                 android:layout_weight="1" />
 
             <Space
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="0.2" />
+                android:layout_weight="0.1" />
 
             <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="0.6"
+                android:layout_weight="0.4"
                 android:orientation="vertical">
 
                 <Space
@@ -69,7 +70,9 @@
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
                     android:layout_weight="0.1"
-                    android:text="Students" />
+                    android:textSize="10dp"
+                    android:text="Students"
+                    android:onClick="SB"/>
 
                 <Space
                     android:layout_width="match_parent"
@@ -81,6 +84,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
                     android:layout_weight="0.1"
+                    android:onClick="GB"
                     android:text="Grades" />
 
                 <Space
@@ -93,6 +97,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
                     android:layout_weight="0.1"
+                    android:onClick="Delete"
                     android:text="press on shimon" />
 
                 <Space

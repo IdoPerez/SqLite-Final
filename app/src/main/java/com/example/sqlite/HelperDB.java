@@ -38,7 +38,7 @@ public class HelperDB extends SQLiteOpenHelper {
 
         //Students
         strCreate ="CREATE TABLE "+ TABLE_STUDENTS;
-        strCreate += " ("+KEY_ID+" INTEGER PRIMARY KEY ,";
+        strCreate += " ("+KEY_ID+" INTEGER PRIMARY KEY,";
         strCreate += " "+NAME+" TEXT,";
         strCreate += " "+ADDRESS+" TEXT,";
         strCreate += " "+PHONE_NUM+" TEXT,";
@@ -47,21 +47,21 @@ public class HelperDB extends SQLiteOpenHelper {
         strCreate += " "+DAD_NUM+" TEXT,";
         strCreate += " "+MOTHER_NAME+" TEXT,";
         strCreate += " "+MOM_NUM+" TEXT,";
-        strCreate += " "+isActive+" INTEGER,";
+        strCreate += " "+Student.isActive+" INTEGER";
         strCreate+=");";
         db.execSQL(strCreate);
 
         //GRADES:
         strCreate ="CREATE TABLE "+ TABLE_GRADES;
-        strCreate += " ("+Grades.KEY_ID+" INTEGER PRIMARY KEY ,";
+        strCreate += " ("+Grades.KEY_ID+" INTEGER PRIMARY KEY,";
         strCreate += " "+Grades.NAME+" TEXT,";
         strCreate += " "+ Quarter+" TEXT,";
         strCreate += " "+ Subject+" TEXT,";
-        strCreate += " "+GRADE+" INTEGER";
-        strCreate += " "+Grades.isActive+" INTEGER,";
+        strCreate += " "+GRADE+" INTEGER,";
+        strCreate += " "+Grades.isActive+" INTEGER";
         strCreate+=");";
-        db.execSQL(strCreate);
 
+        db.execSQL(strCreate);
 
 
 
