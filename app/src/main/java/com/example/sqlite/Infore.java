@@ -6,7 +6,6 @@ import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
-import android.os.Debug;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -16,17 +15,18 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 import static com.example.sqlite.Grades.TABLE_GRADES;
+import static com.example.sqlite.Student.KEY_ID;
 import static com.example.sqlite.Student.TABLE_STUDENTS;
 
 public class Infore extends AppCompatActivity implements AdapterView.OnItemClickListener {
     ArrayList<String> Students = new ArrayList<>();
-    ArrayList<String> AraayGrades = new ArrayList<>();
+    ArrayList<String> ArrayGrades = new ArrayList<>();
     ListView listView;
     ArrayAdapter<String> adp;
     HelperDB hlp;
     SQLiteDatabase db;
     Cursor crsr;
-    int itemDelete;
+    int itemDelete = -1;
     TextView tv;
 
 
@@ -37,6 +37,8 @@ public class Infore extends AppCompatActivity implements AdapterView.OnItemClick
 
         listView = (ListView) findViewById(R.id.Infor);
         tv = (TextView) findViewById(R.id.textView2);
+
+
         listView.setOnItemClickListener(this);
         listView.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
         hlp = new HelperDB(this);
@@ -90,12 +92,12 @@ public class Infore extends AppCompatActivity implements AdapterView.OnItemClick
             crsr.moveToNext();
         }
         db.close();
-        ArrayAdapter<String> adp = new ArrayAdapter<String>(this,  R.layout.support_simple_spinner_dropdown_item, Students);
+        adp = new ArrayAdapter<String>(this,  R.layout.support_simple_spinner_dropdown_item, Students);
         listView.setAdapter(adp);
     }
 
     public void GB(View view) {
-        AraayGrades.clear();
+        ArrayGrades.clear();
         db = hlp.getReadableDatabase();
         crsr = db.query(TABLE_GRADES, null,null,null,null,null,null);
 
@@ -119,34 +121,36 @@ public class Infore extends AppCompatActivity implements AdapterView.OnItemClick
                 String Grade = crsr.getString(col4);
 
                 tmp = "" + Key + ". " + Name + ", " + Quarter + ", " + Subject + ", " + Grade;
-                AraayGrades.add(tmp);
+                ArrayGrades.add(tmp);
             }
             crsr.moveToNext();
         }
-
-        ArrayAdapter<String> adp = new ArrayAdapter<String>(this,  R.layout.support_simple_spinner_dropdown_item, Students);
+        adp = new ArrayAdapter<String>(this,  R.layout.support_simple_spinner_dropdown_item, ArrayGrades);
         listView.setAdapter(adp);
     }
-        /*
-    public void Delete(View view) {
-        String tmp = Students.get(itemDelete);
-        Students.remove(itemDelete);
-        ContentValues cv = new ContentValues();
-        int i = 0;
-        String key = "";
 
-        while(tmp.charAt(i) != '.'){
-            key += tmp.charAt(i);
-            i++;
-        }
-        //tv.setText(key);
+    public void Delete(View view) {
+        if(itemDelete != -1 && !Students.isEmpty() ) {
+            String tmp = Students.get(itemDelete);
+            Students.remove(itemDelete);
+            ContentValues cv = new ContentValues();
+            int i = 0;
+            String key = "";
+
+            while (tmp.charAt(i) != '.') {
+                key += tmp.charAt(i);
+                i++;
+            }
+            int id = Integer.parseInt(key);
+            tv.setText(key);
 
             cv.put(Student.isActive, 0);
             db = hlp.getWritableDatabase();
-            db.update(TABLE_STUDENTS, cv,  + "=?", new String[]{"1"});
+            db.update(TABLE_STUDENTS, cv, KEY_ID + key, null);
             db.close();
-            ArrayAdapter<String> adp = new ArrayAdapter<String>(this, R.layout.support_simple_spinner_dropdown_item, Students);
-            listView.setAdapter(adp);
 
-    } */
+            adp.notifyDataSetChanged();
+
+        }
+    }
 }

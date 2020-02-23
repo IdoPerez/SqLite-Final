@@ -91,6 +91,7 @@ public class MainActivity extends AppCompatActivity {
         cv.put(Grades.Subject,st[2]);
         cv.put(Grades.GRADE,st[3]);
         cv.put(Grades.isActive,1);
+
         hlp = new HelperDB(this);
         db = hlp.getWritableDatabase();
         db.insert(Grades.TABLE_GRADES, null, cv);
@@ -102,12 +103,14 @@ public class MainActivity extends AppCompatActivity {
         Subject.setText("Subject");
     }
 
+    @Override
     public boolean onCreateOptionsMenu(Menu menu){
         getMenuInflater().inflate(R.menu.main, menu);
 
         return true;
     }
 
+    @Override
     public boolean onOptionsItemSelected(MenuItem item){
         int id = item.getItemId();
 
