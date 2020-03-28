@@ -98,7 +98,7 @@
                     android:layout_height="0dp"
                     android:layout_weight="0.1"
                     android:onClick="Delete"
-                    android:text="press on shimon" />
+                    android:text="Delete" />
 
                 <Space
                     android:layout_width="match_parent"

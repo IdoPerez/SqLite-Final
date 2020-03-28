@@ -12,6 +12,11 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
+/**
+ * @author Ido Perez
+ * @since 2.9.03
+ * @version 001
+ */
 public class MainActivity extends AppCompatActivity {
     HelperDB hlp;
     SQLiteDatabase db;
@@ -41,6 +46,10 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    /**
+     * tThe method input the editText convert him to String and put the values in the Students table.
+     * @param view
+     */
     public void SB(View view) {
         String st[] = new String[8];
         st[0] = Name.getText().toString();
@@ -78,6 +87,11 @@ public class MainActivity extends AppCompatActivity {
         Dad_Num.setText("Father Num");
 
     }
+
+    /**
+     * The method input the editText convert him to String and put the values in the Grades table.
+     * @param view
+     */
     public void GB(View view) {
         String st[] = new String[4];
         st[0] = NameGrade.getText().toString();
@@ -103,6 +117,11 @@ public class MainActivity extends AppCompatActivity {
         Subject.setText("Subject");
     }
 
+    /**
+     * options menu for moving from activities.
+     * @param menu
+     * @return
+     */
     @Override
     public boolean onCreateOptionsMenu(Menu menu){
         getMenuInflater().inflate(R.menu.main, menu);
@@ -116,6 +135,10 @@ public class MainActivity extends AppCompatActivity {
 
         if(id == R.id.Infore){
             Intent si = new Intent(this, Infore.class);
+            startActivity(si);
+            return true;
+        }else if (id == R.id.Sort){
+            Intent si = new Intent(this, Sort.class);
             startActivity(si);
             return true;
         }
